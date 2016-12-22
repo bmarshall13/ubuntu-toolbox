@@ -9,8 +9,11 @@ RUN apt-get update -y && apt-get -y install \
       iputils-ping \
       less \
       man-db \
+      manpages \
+      manpages-dev \
       ncurses-term \
       net-tools \
+      netcat-openbsd \
       tcpdump \
       vim \
   && apt-get clean \
