@@ -4,6 +4,7 @@ RUN apt-get update -y && apt-get -y install \
       command-not-found \
       curl \
       dialog \
+      ebtables \
       iproute2 \
       iptables \
       iputils-ping \
