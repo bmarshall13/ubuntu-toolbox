@@ -1,6 +1,7 @@
 FROM ubuntu:xenial
 
 RUN apt-get update -y && apt-get -y install \
+      awscli \
       command-not-found \
       curl \
       dialog \
