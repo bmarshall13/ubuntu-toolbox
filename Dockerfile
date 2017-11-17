@@ -10,6 +10,7 @@ RUN apt-get update -y && apt-get -y install \
       iproute2 \
       iptables \
       iputils-ping \
+      jq \
       less \
       man-db \
       manpages \
