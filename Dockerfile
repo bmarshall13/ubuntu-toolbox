@@ -7,6 +7,7 @@ RUN apt-get update -y && apt-get -y install \
       dialog \
       dnsutils \
       ebtables \
+      gdb \
       iproute2 \
       iptables \
       iputils-ping \
