@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:artful
 
 RUN apt-get update -y && apt-get -y install \
       awscli \
