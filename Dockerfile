@@ -1,7 +1,10 @@
-FROM ubuntu:artful
+FROM ubuntu:bionic
+
+ARG HELM_VERSION=2.12.2
 
 RUN apt-get update -y && apt-get -y install \
       awscli \
+      bash-completion \
       command-not-found \
       curl \
       dialog \
@@ -26,7 +29,11 @@ RUN apt-get update -y && apt-get -y install \
   && curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
   && chmod +x ./kubectl \
   && mv kubectl /usr/local/bin/ \
-  && curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.8.0-linux-amd64.tar.gz \
-  && tar zxf helm-v2.8.0-linux-amd64.tar.gz linux-amd64/helm \
-  && mv linux-amd64/helm /usr/local/bin/helm
+  && curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+  && tar zxf helm-v${HELM_VERSION}-linux-amd64.tar.gz linux-amd64/helm \
+  && mv linux-amd64/helm /usr/local/bin/helm \
+  && echo "source /etc/bash_completion" >> /etc/bash.bashrc \
+  && echo "source <(kubectl completion bash)" >> /etc/bash.bashrc \
+  && echo "source <(helm completion bash)" >> /etc/bash.bashrc \
+  && echo "Done"
 
