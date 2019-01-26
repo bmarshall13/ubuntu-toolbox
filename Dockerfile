@@ -2,15 +2,18 @@ FROM ubuntu:bionic
 
 ARG HELM_VERSION=2.12.2
 
-RUN apt-get update -y && apt-get -y install \
+RUN export DEBIAN_FRONTEND=noninteractive \
+ && apt-get update -y && apt-get -y install \
       awscli \
       bash-completion \
       command-not-found \
       curl \
       dialog \
+      direnv \
       dnsutils \
       ebtables \
       gdb \
+      git \
       iproute2 \
       iptables \
       iputils-ping \
@@ -22,6 +25,9 @@ RUN apt-get update -y && apt-get -y install \
       ncurses-term \
       net-tools \
       netcat-openbsd \
+      python-pip \
+      python3-pip \
+      virtualenv \
       tcpdump \
       vim \
   && apt-get clean \
@@ -32,8 +38,9 @@ RUN apt-get update -y && apt-get -y install \
   && curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
   && tar zxf helm-v${HELM_VERSION}-linux-amd64.tar.gz linux-amd64/helm \
   && mv linux-amd64/helm /usr/local/bin/helm \
-  && echo "source /etc/bash_completion" >> /etc/bash.bashrc \
-  && echo "source <(kubectl completion bash)" >> /etc/bash.bashrc \
-  && echo "source <(helm completion bash)" >> /etc/bash.bashrc \
   && echo "Done"
+
+COPY overlay/ /
+
+CMD ["/bin/bash", "-l" ]
 
